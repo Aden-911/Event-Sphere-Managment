@@ -10,7 +10,7 @@ router.post('/register', registerUser);
 // POST /api/auth/login
 router.post('/login', loginUser);
 
-router.get('/adminpage', protect, (req, res) => {
+router.get('/admin', protect, (req, res) => {
     res.json({
         message: 'Welcome to your profile',
         user: req.user, // user will be available because of the protect middleware
