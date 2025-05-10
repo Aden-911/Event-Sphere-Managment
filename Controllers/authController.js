@@ -30,10 +30,11 @@ const loginUser = async (req, res) => {
       redirectPath = '/exhibitorDashboard';
     } else if (user.role === 'attendee') {
       redirectPath = '/attendeeDashboard';
-    }
+    };
 
 
     console.log("User Logged In Successfully!")
+    
     res.json({
       _id: user._id,
       name: user.name,
@@ -81,7 +82,7 @@ const registerUser = async (req, res) => {
       expiresIn: '30d',
     });
 
-        // Respond with token and role-based redirect path
+    // Respond with token and role-based redirect path
     let redirectPath = '/'; // default
 
     if (user.role === 'admin') {
@@ -93,6 +94,7 @@ const registerUser = async (req, res) => {
     }
 
     console.log("User created:", user._id);
+    
     res.status(201).json({
       _id: user._id,
       name: user.name,
