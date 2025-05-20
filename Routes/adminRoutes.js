@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../Models/UserSchema');
-const protect = require('../Middleware/authMiddleware');
+const adminOnly = require('../Middleware/authMiddleware');
 
-router.get('/users', protect, async (req, res) => {
+router.get('/users', adminOnly, async (req, res) => {
     try {
         if (req.user.role !== 'admin') {
             return res.status(403).json({ message: 'Access denied : Admin only!!' })
@@ -16,7 +16,7 @@ router.get('/users', protect, async (req, res) => {
     }
 });
 
-router.put('/users/:id/role', protect, async (req, res) => {
+router.put('/users/:id/role', adminOnly, async (req, res) => {
     try {
         const { role } = req.body;
         if (req.user.role !== 'admin') {
@@ -33,7 +33,7 @@ router.put('/users/:id/role', protect, async (req, res) => {
     }
 })
 
-router.delete('/users/:id', protect, async (req, res) => {
+router.delete('/users/:id', adminOnly, async (req, res) => {
     try {
         if (req.user.role !== 'admin') {
             return res.status(403).json({ message: 'Access denied : Admin only!!' })
